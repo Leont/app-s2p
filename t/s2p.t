@@ -38,11 +38,6 @@ use Test::More;
 use Devel::FindPerl qw/find_perl_interpreter/;
 use IPC::Open2;
 
-BEGIN {
-#    chdir 't' if -d 't';
-#    @INC = ( '../lib' );
-}
-
 # BRE extensions
 $ENV{PSEDEXTBRE} = '<>wW';
 
