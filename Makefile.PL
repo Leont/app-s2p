@@ -47,6 +47,7 @@ sub postamble {
 
 	$ret .= <<'END';
 $(INST_SCRIPT)/psed: $(INST_SCRIPT)/s2p
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/psed
 	$(CP) $(INST_SCRIPT)/s2p $(INST_SCRIPT)/psed
 	$(FIXIN) $(INST_SCRIPT)/psed
 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/psed
