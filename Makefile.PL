@@ -1,8 +1,12 @@
+use strict;
+use warnings;
 use ExtUtils::MakeMaker;
+use File::Spec;
  
 my %args = (
-##{ $plugin->get_default(qw(NAME ABSTRACT AUTHOR LICENSE VERSION EXE_FILES)) ##}
+##{ $plugin->get_default(qw(NAME ABSTRACT AUTHOR LICENSE VERSION)) ##}
 ##{ $plugin->get_prereqs(1) ##}
+  EXE_FILES => [ map { File::Spec->catfile('script', $_) } qw{s2p psed} ]
 );
  
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
@@ -43,17 +47,9 @@ package MY;
 
 sub postamble {
 	my $self = shift;
-	my $ret = $self->SUPER::postamble;
 
-	$ret .= <<'END';
-$(INST_SCRIPT)/psed: $(INST_SCRIPT)/s2p
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/psed
-	$(CP) $(INST_SCRIPT)/s2p $(INST_SCRIPT)/psed
-	$(FIXIN) $(INST_SCRIPT)/psed
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/psed
-
-pure_all :: $(INST_SCRIPT)/psed
-
+	return $self->SUPER::postamble . <<'END';
+script/psed: script/s2p
+	$(CP) script/s2p script/psed
 END
-
 }
