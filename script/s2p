@@ -1,16 +1,18 @@
 #! perl
 
-$0 =~ s/^.*?(\w+)[\.\w]*$/$1/;
-
 # (p)sed - a stream editor
 # History:  Aug 12 2000: Original version.
 #           Mar 25 2002: Rearrange generated Perl program.
 #           Jul 23 2007: Fix bug in regex stripping (M.Thorland)
 
+package App::s2p;
+
 use strict;
 use integer;
 use Symbol;
 use Config;
+
+$0 =~ s/^.*?(\w+)[\.\w]*$/$1/;
 
 =head1 NAME
 
