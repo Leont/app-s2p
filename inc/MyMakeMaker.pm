@@ -4,11 +4,10 @@ use Moose;
 extends 'Dist::Zilla::Plugin::MakeMaker::Awesome';
 
 use File::Spec;
- 
-override _build_WriteMakefile_args => sub { +{
-	%{ super() },
-	EXE_FILES => [ map { File::Spec->catfile('script', $_) } qw{s2p psed} ]
-} };
+
+override 'exe_files' => sub {
+	return map { File::Spec->catfile('script', $_) } qw{s2p psed};
+};
 
 override _build_MakeFile_PL_template => sub {
 	my ($self) = @_;
