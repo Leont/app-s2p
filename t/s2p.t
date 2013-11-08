@@ -35,7 +35,7 @@ use File::Copy;
 use File::Spec;
 use Test::More;
 
-use Devel::FindPerl qw/find_perl_interpreter/;
+use Devel::FindPerl 0.009 qw/find_perl_interpreter/;
 use IPC::Open2;
 
 # BRE extensions
@@ -891,8 +891,9 @@ END {
 
 sub runperl {
 	my %args = @_;
-	my $perl = find_perl_interpreter();
-	my @args = ($perl, @{ $args{args} });
+	my @args = find_perl_interpreter();
+	push @args, $args{progfile} if $args{progfile};
+	push @args, @{ $args{args} } if $args{args};
 	my $pid = open2(my ($in, $out), @args);
 	binmode $in, ':crlf' if $^O eq 'MSWin32';
 	my $ret = do { local $/; <$in> };
