@@ -3,10 +3,8 @@ use Moose;
 
 extends 'Dist::Zilla::Plugin::MakeMaker::Awesome';
 
-use File::Spec;
-
 override 'exe_files' => sub {
-	return map { File::Spec->catfile('script', $_) } qw{s2p psed};
+	return qw{script/s2p script/psed};
 };
 
 override _build_MakeFile_PL_template => sub {
@@ -16,12 +14,15 @@ override _build_MakeFile_PL_template => sub {
 	$template .= <<'TEMPLATE';
 package MY;
 
+use File::Spec;
+
 sub postamble {
 	my $self = shift;
 
-	return $self->SUPER::postamble . <<'END';
-script/psed: script/s2p
-	$(CP) script/s2p script/psed
+	my ($s2p, $psed) = map { File::Spec->catfile('script', $_) } qw/s2p psed/;
+	return $self->SUPER::postamble . <<"END";
+$psed: $s2p
+	\$(CP) $s2p $psed
 END
 }
 TEMPLATE
