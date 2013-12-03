@@ -1,6 +1,7 @@
 Revision history for App-s2p
 
 {{$NEXT}}
+          Fix licensing and attribution
 
 1.001     2013-12-04 00:26:27 Europe/Amsterdam
           Fixed up provides field in metadata
