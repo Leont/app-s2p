@@ -7,7 +7,9 @@
 
 package App::s2p;
 
+use 5.006;
 use strict;
+use warnings;
 use integer;
 use Symbol;
 use Config;
