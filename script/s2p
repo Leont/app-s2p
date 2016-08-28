@@ -1183,7 +1183,7 @@ sub Parse(){
         }
         my $fl = "$pfil$plin";
 
-        # insert command as comment in gnerated code
+        # insert command as comment in generated code
 	#
 	$Code .= "# $cmd\n" if $doGenerate;
 
@@ -1968,7 +1968,7 @@ Trailing spaces are truncated from labels in B<:>, B<t> and B<b> commands.
 
 The meaning of an empty regular expression ('C<//>'), as defined by B<sed>,
 is "the last pattern used, at run time". This deviates from the Perl
-interpretation, which will re-use the "last last successfully executed
+interpretation, which will re-use the "last successfully executed
 regular expression". Since keeping track of pattern usage would create
 terribly cluttered code, and differences would only appear in obscure
 context (where other B<sed> implementations appear to deviate, too),
