@@ -1411,6 +1411,15 @@ sub Parse(){
 	    if( $key eq '{' ){
 		# dirty hack to process command on '{' line
 		$Commands[$icom--] = $cmd;
+
+        } elsif( $cmd =~ s/^\s*;\s*// ) {
+        # Another command follows, so handle that in the next round
+        # This is somewhat hacky, but unless we either parse the
+        # commands twice we have no choice but to change the @Commands array
+        # on the fly as we discover new commands
+		# This is the same hack as above
+		$Commands[$icom--] = $cmd;
+
 	    } else {
 		Warn( "extra characters after command ($cmd)", $fl );
 		$error++;
