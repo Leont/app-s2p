@@ -31,12 +31,15 @@ Author: Wolfgang Laun.
 
 =cut
 
+use Config;
 use File::Copy;
 use File::Spec;
 use Test::More;
-
-use Devel::FindPerl 0.009 qw/find_perl_interpreter/;
 use IPC::Open2;
+
+sub find_perl_interpreter {
+	return File::Spec->file_name_is_absolute($^X) ? $^X : $Config{perlpath};
+}
 
 # BRE extensions
 $ENV{PSEDEXTBRE} = '<>wW';
